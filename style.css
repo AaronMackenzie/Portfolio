@@ -43,7 +43,7 @@
     }
     
     /* Intro image - DO NOT CHANGE image source in CSS, keep in HTML */
-    #intro-img {
+    #intro video {
       width: 100%;
       height: 100%;
       object-fit: cover; /* CHANGE: 'contain' to see full image without cropping */
