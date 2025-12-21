@@ -1,612 +1,815 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aaron Mackenzie Misquith - Portfolio</title>
-  <style>
- * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  background: white;
-  color: #333;
-}
-
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 3em 1em;
-  border-bottom: 3px solid #ccc;
-}
-
-.right-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-}
-
-.right-controls span.hpc-role {
-  font-size: 1.3em;
-  font-style: italic;
-  color: #007acc;
-  font-family: 'cursive', sans-serif;
-}
-
-.welcome-text,
-.hpc-role {
-  font-size: 1.5em;
-  font-style: normal; /* since font handles style */
-  font-family: 'Dancing Script', cursive;
-  color: #007acc;
-}
-
-
-
-.title {
-  padding: 1.5em 2em 0.5em;
-  font-size: 2em;
-  font-weight: bold;
-}
-
-.summary {
-  padding: 0 2em 2em;
-  max-width: 1000px;
-  font-size: 1.1em;
-}
-
-.banner {
-  width: 100%;
-  height: 350px;
-  background: url('Images/Banner.jpg') no-repeat center center fixed;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-bottom: 2em;
-}
-
-h2 {
-  text-align: center;
-  margin: 1.5em 0 0.5em;
-}
-
-.skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2em;
-  padding: 2em;
-}
-
-.skill-box {
-  background-color: #f4f4f4;
-  padding: 1.5em;
-  border-radius: 8px;
-  width: 250px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-box h3 {
-  font-size: 1.2em;
-  margin-bottom: 1em;
-  color: #007acc;
-}
-
-.skill-box p {
-  font-size: 1em;
-  color: #333;
-}
-
-.skill-box:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
-}
-
-.pub-box, .experience-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: #f4f4f4;
-  padding: 1.5em;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: auto;
-  min-width: fit-content;
-  max-width: 600px;
-  cursor: pointer;
-  overflow: hidden;
-  transition: max-width 0.6s ease, transform 0.6s ease, background-color 0.6s ease, box-shadow 0.6s ease;
-}
-.pub-box h3, .experience-box h3 {
-  white-space: nowrap;
-  font-size: 1.2em;
-  color: #007acc;
-  margin-bottom: 0.5em;
-}
-
-.experience-box:hover, .pub-box:hover {
-  transform: scale(1.1); /* Subtle hover scale for better user experience */
-}
-
-.experience-box .expanded-content, .pub-box .expanded-content {
-  display: none;
-  margin-top: 1em;
-  font-size: 0.95em;
-}
-
-.experience-box.expanded, .pub-box.expanded {
-  max-width: 600px; /* Expanding the box */
-  background-color: #e8f4ff;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  transform: scale(1.02); /* Subtle expansion */
-}
-
-.experience-box.expanded .expanded-content, .pub-box.expanded .expanded-content {
-  display: block;
-}
-
-
-.timeline-container {
-  position: relative;
-  margin-left: 2em;
-  padding-left: 2em;
-  border-left: 4px solid #007acc;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 2em;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -1.4em;
-  top: 0.6em;
-  width: 1em;
-  height: 1em;
-  background-color: #007acc;
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 0 0 2px #007acc;
-}
-
-.timeline-date {
-  display: block;
-  font-size: 0.9em;
-  color: #666;
-  margin-top: 0.3em;
-  font-weight: normal;
-}
-
-.pub-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2em;
-  padding: 2em;
-}
-
-.projects-list {
-  list-style-type: none;
-  padding: 2em;
-  max-width: 1000px;
-  margin: 0 auto;
-  font-size: 1.05em;
-  line-height: 1.6;
-}
-
-.project {
-  opacity: 0;
-  transform: translateY(200px);
-  transition: opacity 2.6s ease-out, transform 0.6s ease-out;
-}
-
-.project.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-#contact {
-  padding: 2em;
-  text-align: center;
-}
-
-.contact-details {
-  font-size: 1.1em;
-  line-height: 1.8em;
-  color: #333;
-}
-
-.contact-details a {
-  color: #007acc;
-  text-decoration: none;
-}
-
-.contact-details a:hover {
-  text-decoration: underline;
-}
-.pub-box h3, .experience-box h3 {
-  white-space: nowrap;
-  font-size: 1.2em;
-  color: #007acc;
-  margin-bottom: 0.5em;
-}
-
-.pub-box:not(.expanded), .experience-box:not(.expanded) {
-  min-width: max-content;
-  max-width: max-content;
-  height: auto;
-}
-
-.pub-box.expanded, .experience-box.expanded {
-  max-width: 600px;
-  background-color: #e8f4ff;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
-  min-width: unset;
-}
-.expanded-content {
-  display: none;
-  margin-top: 1em;
-  font-size: 0.95em;
-}
-
-
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  
+  
 </head>
 <body>
 
-<div class="top-bar">
-  <div class="left-controls">
-    <span class="welcome-text">Welcome to my portfolio</span>
+  <!-- ============================================
+       INTRO SPLASH SCREEN
+       Shows on page load, then fades out
+       DO NOT CHANGE: Image source
+       ============================================ -->
+<div id="intro">
+    <img id="intro-img" src="Media/Intro.mp4" alt="Intro animation">
   </div>
-  <div class="right-controls">
-    <span class="hpc-role">High-Performance Computing Engineer</span>
+
+  <!-- ============================================
+       NAVIGATION BAR
+       Fixed at top of page
+       ============================================ -->
+  <header>
+    <nav class="navbar">
+      <!-- Left side - Navigation links -->
+      <div class="nav-links">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#publications" class="nav-link">Publications</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#achievements" class="nav-link">Awards</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      
+      <!-- Right side - Contact icons -->
+      <div class="contact-icons">
+        <a href="mailto:aaronmackenzz@gmail.com" title="Email" aria-label="Email">✉️</a>
+        <a href="https://github.com/AaronMackenzie" target="_blank" title="GitHub" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle">
+  <path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.95.57.11.78-.25.78-.55v-2.02c-3.2.7-3.87-1.54-3.87-1.54-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.27 1.19-3.07-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.17a11.1 11.1 0 0 1 5.8 0c2.21-1.48 3.18-1.17 3.18-1.17.63 1.59.23 2.77.11 3.06.74.8 1.19 1.82 1.19 3.07 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.08.78 2.18v3.24c0 .3.21.66.79.55A11.52 11.52 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5z"/>
+</svg>
+</a>
+        <a href="https://scholar.google.com/citations?user=3Jr8lpwAAAAJ&hl=en" target="_blank" title="Google Scholar" aria-label="Google Scholar"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle">
+  <path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 7.09L5.47 7 12 4.91 18.53 7 12 9.09z"/>
+  <path d="M11 12.91L6 10.64V14c0 2.21 2.24 4 5 4s5-1.79 5-4v-3.36l-5 2.27z"/>
+</svg>
+</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============================================
+       HOME SECTION
+       DO NOT CHANGE: Background image
+       ============================================ -->
+  <section id="home">
+    <div class="home-overlay">
+      <h1>Aaron Mackenzie Misquith</h1>
+      <h2 style="font-size: 1.5rem; color: #3a7bc8; margin-bottom: 20px; font-weight: 500;">Hi, I’m Aaron. Welcome to my digital portfolio.</h2>
+      <h2 style="font-size: 1.5rem; color: #3a7bc8; margin-bottom: 20px; font-weight: 500;">Am a High Performance Machine Learning Samurai</h2>
+      
+      </div>
+  </section>
+
+  <!-- ============================================
+       SKILLS SECTION
+       DO NOT CHANGE: Background image
+       ============================================ -->
+  <section id="skills">
+    <!-- Overlay box that bridges Home and Skills sections -->
+    <div class="skills-overlay-box">
+      <h2>My Skillset</h2>
+      <p>Comprehensive expertise across machine learning systems, distributed computing, and research engineering</p>
+      
+      <a href="https://raw.githubusercontent.com/AaronMackenzie/Portfolio/d2521b81f2ea9ef6afd85cb72a12dd244a5b0c11/Aaron_Misquith_CV.pdf" class="cv-button" download>Download CV</a>
+    </div>
+
+    <div class="skills-container">
+      
+      <!-- SKILL BOX 1: Programming & Systems Engineering -->
+      <div class="skill-category">
+        <h3>Programming & Systems Engineering</h3>
+        <div class="skill-content">
+          <div class="skill-description">
+            <h4>Expertise level: Advanced</h4>
+            <p>I work primarily in Python and C for research prototyping and performance-oriented system development. I have strong fundamentals in C++ and Java, enabling me to reason about memory, execution flow, and low-level performance considerations. I regularly use SQL and shell scripting for data pipelines, experimentation, and system automation, with working familiarity in JavaScript and R for auxiliary tasks.</p>
+            
+            <!-- SKILL LEVELS TABLE -->
+            <table class="skill-table">
+              <thead>
+                <tr>
+                  <th>Language/Tool</th>
+                  <th>Proficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Python</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>C</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>C++</td>
+                  <td><span class="level-medium-high">Medium–High</span></td>
+                </tr>
+                <tr>
+                  <td>Java</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>SQL</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>Bash/Shell</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>JavaScript / CSS / HTML</td>
+                  <td><span class="level-basic">Basic</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skill-graph">
+            <canvas id="radarChart1"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILL BOX 2: Machine Learning & RL Systems -->
+      <div class="skill-category">
+        <h3>Machine Learning & Reinforcement Learning Systems</h3>
+        <div class="skill-content">
+          <div class="skill-description">
+            <h4>Expertise level: Advanced</h4>
+            <p>My work centers on reinforcement learning, evolutionary optimization, and scalable ML experimentation. I have implemented and benchmarked RL agents, optimization algorithms, and hybrid learning pipelines using PyTorch, Ray RLlib, and classical ML frameworks. My focus is on training stability, scalability, and performance under distributed and heterogeneous compute settings.</p>
+            
+            <!-- SKILL LEVELS TABLE -->
+            <table class="skill-table">
+              <thead>
+                <tr>
+                  <th>Framework/Tool</th>
+                  <th>Proficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Reinforcement Learning</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>PyTorch</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>Ray RLlib</td>
+                  <td><span class="level-medium-high">Medium–High</span></td>
+                </tr>
+                <tr>
+                  <td>scikit-learn</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>TensorFlow</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>OpenAI Gym</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skill-graph">
+            <canvas id="radarChart2"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILL BOX 3: Distributed Computing & HPC -->
+      <div class="skill-category">
+        <h3>Distributed Computing & High-Performance Systems</h3>
+        <div class="skill-content">
+          <div class="skill-description">
+            <h4>Expertise level: Advanced</h4>
+            <p>I have hands-on experience designing and benchmarking distributed systems for large-scale machine learning and optimization workloads. My work includes parallelizing evolutionary algorithms, deploying multi-node Spark clusters, and evaluating scalability across distributed environments. I am particularly interested in system-aware scheduling, heterogeneous resource utilization, and reducing training latency through algorithm–system co-design.</p>
+            
+            <!-- SKILL LEVELS TABLE -->
+            <table class="skill-table">
+              <thead>
+                <tr>
+                  <th>Technology/Tool</th>
+                  <th>Proficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Apache Spark / PySpark</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>Ray</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>HDFS</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>MPI</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>OpenMP</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>CUDA</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skill-graph">
+            <canvas id="radarChart3"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILL BOX 4: Data Engineering -->
+      <div class="skill-category">
+        <h3>Data Engineering & Applied ML Systems</h3>
+        <div class="skill-content">
+          <div class="skill-description">
+            <h4>Expertise level: Intermediate–Advanced</h4>
+            <p>I design data pipelines and analytics systems for both research and industry use cases. My experience includes Python-based ETL workflows, SQL optimization, ensemble ML models for forecasting and anomaly detection, and building interactive dashboards for decision support in production environments.</p>
+            
+            <!-- SKILL LEVELS TABLE -->
+            <table class="skill-table">
+              <thead>
+                <tr>
+                  <th>Technology/Tool</th>
+                  <th>Proficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Pandas / NumPy</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>Power BI</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>ETL Pipelines</td>
+                  <td><span class="level-medium-high">Medium–High</span></td>
+                </tr>
+                <tr>
+                  <td>Forecasting Models</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>SQL Optimization</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skill-graph">
+            <canvas id="radarChart4"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILL BOX 5: Mathematics & Optimization -->
+      <div class="skill-category">
+        <h3>Mathematics & Optimization Foundations</h3>
+        <div class="skill-content">
+          <div class="skill-description">
+            <h4>Expertise level: Strong foundations</h4>
+            <p>I maintain strong working knowledge of the mathematical foundations underlying machine learning and optimization, including probability theory, linear algebra, stochastic methods, and reinforcement learning formulations. My strength lies in applying these concepts to real systems, particularly in the context of scalable and distributed optimization.</p>
+            
+            <!-- SKILL LEVELS TABLE -->
+            <table class="skill-table">
+              <thead>
+                <tr>
+                  <th>Area</th>
+                  <th>Proficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>RL Theory</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>Evolutionary Algorithms</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>Probability & Statistics</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>Linear Algebra</td>
+                  <td><span class="level-medium-high">Medium–High</span></td>
+                </tr>
+                <tr>
+                  <td>Distributed Optimization</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skill-graph">
+            <canvas id="radarChart5"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILL BOX 6: Tools & Research Workflow -->
+      <div class="skill-category">
+        <h3>Tools, Experimentation & Research Workflow</h3>
+        <div class="skill-content">
+          <div class="skill-description">
+            <h4>Expertise level: Advanced</h4>
+            <p>I am comfortable working in Linux-based research environments and managing end-to-end experimentation workflows. My experience includes version-controlled research codebases, LaTeX-based academic writing, remote cluster access via SSH, reproducible experimentation using Jupyter, and basic CI/CD practices for automation and reliability.</p>
+            
+            <!-- SKILL LEVELS TABLE -->
+            <table class="skill-table">
+              <thead>
+                <tr>
+                  <th>Tool/Platform</th>
+                  <th>Proficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Linux Shell Scripting</td>
+                  <td><span class="level-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>Git / GitHub</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>SSH / Remote Clusters</td>
+                  <td><span class="level-medium-high">Medium–High</span></td>
+                </tr>
+                <tr>
+                  <td>LaTeX</td>
+                  <td><span class="level-medium-high">Medium–High</span></td>
+                </tr>
+                <tr>
+                  <td>PyCharm</td>
+                  <td><span class="level-high">High</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skill-graph">
+            <canvas id="radarChart6"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILL BOX 7: Other Skills -->
+     <div class="skill-category">
+  <h3>Other Skills & Interests</h3>
+  <div class="skill-content">
+    <p style="max-width: 700px; margin-bottom: 20px; color: #b8c1cc;">
+      Skills that support clear communication, creative balance, and discipline outside core research work.
+    </p>
+    <ul class="other-skills">
+      <li>Presentation & Technical Communication</li>
+      <li>Academic Writing & Slide Design</li>
+      <li>Guitar Performance</li>
+      <li>Songwriting & Music Composition</li>
+      <li>Athletic Track Running (100m, 200m)</li>
+      <li>Football</li>
+    </ul>
   </div>
 </div>
 
 
 
-
-  <div class="title">Aaron Mackenzie Misquith</div>
-
-  <div class="summary">
-    I’m a performance-driven computing engineer specializing in high-performance and distributed systems, with a passion for solving complex problems at scale. My expertise lies in parallel algorithm design, evolutionary optimization, and large-scale data processing using frameworks like Apache Spark, Ray, OpenMP, and HDFS. I integrate these systems with machine learning models using Python and scikit-learn to create intelligent, scalable solutions that push the boundaries of computational efficiency.
-     </div>
-
-  <div class="banner"></div>
-
-  <h2>Skills</h2>
-<p class="summary">Click to view more details.</p>
-<div class="pub-container">
-  <div class="pub-box" onclick="toggleExpand(this)">
-    <h3>High-Performance & Distributed Computing</h3>
-    <div class="expanded-content">
-      <ul>
-        <li>Designed and implemented HPC and distributed systems for data-intensive workloads.</li>
-        <li>Built scalable solutions using Apache Spark, Ray, and OpenMP.</li>
-        <li>Tuned Spark clusters for resource efficiency and minimized job latency.</li>
-        <li>Used HDFS for fault-tolerant storage of structured/unstructured data.</li>
-        <li>Focused on real-time, scalable, and fault-tolerant data pipelines.</li>
-      </ul>
     </div>
-  </div>
+  </section>
 
-  <div class="pub-box" onclick="toggleExpand(this)">
-    <h3>Algorithm Development & Optimization</h3>
-    <div class="expanded-content">
-      <ul>
-        <li>Developed swarm intelligence and evolutionary algorithms (PSO, GA, ACO, GSO).</li>
-        <li>Parallelized algorithms using Spark RDDs and DataFrames for scalability.</li>
-        <li>Created hybrid variants for high-dimensional feature selection tasks.</li>
-        <li>Benchmarked on Ackley, Rosenbrock, Schwefel, and Rastrigin functions.</li>
-      </ul>
+  <!-- ============================================
+       EXPERIENCE SECTION - TIMELINE
+       DO NOT CHANGE: Background image
+       ============================================ -->
+  <section id="experience">
+    <h2>Research & Industry Experience</h2>
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      
+       <!-- Timeline Item 1: Nitte Meenakshi Institute of Technology -->
+      <div class="timeline-item left" onclick="toggleDetails(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <img src="Media/NMIT.png" alt="NMIT Logo" class="timeline-logo">
+          <div>
+            <h3>Nitte Meenakshi Institute of Technology</h3>
+            <h4>Research Assistant | Jan 2021 – Dec 2023</h4>
+            <div class="details">
+              <ul>
+                <li>Designed and developed Trading AutoBot, an AI-driven automated trading system integrating statistical methods, machine learning models, and reinforcement learning–based decision logic for both live and simulated trading environments.</li>
+                <li>Architected a modular strategy framework comprising statistical, indicator-based, and ML-driven trading strategies, enabling systematic evaluation and adaptive selection based on asset-specific performance characteristics.</li>
+                <li>Developed a large-scale backtesting pipeline using historical market data and the TradersView platform, evaluating strategy robustness across diverse market regimes, volatility conditions, and asset classes.</li>
+                <li>Implemented a dynamic strategy-selection algorithm that selects and deploys models from a custom strategy library using performance, risk, and market-behavior metrics, allowing adaptive deployment under changing conditions.</li>
+                <li>Integrated brokerage and exchange APIs (Zerodha, Alpaca, Binance) to support real-time and paper-trading execution, ensuring consistency between simulated experiments and live environments.</li>
+                <li>Designed and deployed autonomous risk-management and monitoring systems, including position sizing, drawdown control, and event-triggered alerting pipelines to support end-to-end automated operation.</li>
+                <li>Led experimentation across multiple market scenarios, analyzing trade-offs between profitability, stability, and risk exposure, with findings contributing to a peer-reviewed IEEE conference publication and an Indian patent filing.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+       <!-- Timeline Item 2: Revoseven -->
+      <div class="timeline-item right" onclick="toggleDetails(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <img src="media/RevoSeven.png" alt="Revoseven Logo" class="timeline-logo">
+          <div>
+            <h3>Revoseven</h3>
+            <h4>Tech Consultancy | Jul 2023 – Sep 2023</h4>
+            <div class="details">
+              <ul>
+                <li>Developed TruthScore, a prototype multimodal consistency engine for e-commerce platforms, designed to detect discrepancies between product text, images, pricing, and implied user expectations in client-facing systems.</li>
+                <li>Designed a novel mismatch-scoring mechanism based on multimodal embeddings and cross-modal similarity constraints, enabling quantitative assessment of semantic and visual consistency across heterogeneous data modalities.</li>
+                <li>Built an end-to-end machine learning pipeline covering data ingestion, preprocessing, embedding generation, model training, and cross-modal similarity evaluation for real-world product datasets.</li>
+                <li>Addressed practical deployment constraints typical of small and mid-scale e-commerce clients, including limited labeled data, heterogeneous input quality, and the need for interpretable consistency scores.</li>
+                <li>Delivered a working prototype to a client as part of a consultancy engagement, demonstrating applicability of multimodal ML techniques in production-oriented business environments.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Item 3: North Dakota State University -->
+      <div class="timeline-item left" onclick="toggleDetails(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <img src="Media/NDSU.png" alt="NDSU Logo" class="timeline-logo1">
+          <div>
+            <h3>North Dakota State University</h3>
+            <h4>Research Intern | Feb 2024 – Jul 2024</h4>
+            <div class="details">
+              <ul>
+                <li>Designed and implemented distributed versions of evolutionary optimization algorithms including Particle Swarm Optimization (PSO), Glowworm Swarm Optimization (GSO), Genetic Algorithms (GA), and Ant Colony Optimization (ACO) using Apache Spark and HDFS, enabling scalable optimization across synthetic and real-world datasets.</li>
+                <li>Architected and deployed a multi-node Spark cluster with HDFS for large-scale experimentation, handling data partitioning, fault tolerance, and workload distribution to support reproducible performance evaluation.</li>
+                <li>Executed the first parallel implementation of the Bison classification algorithm, restructuring its computational workflow for distributed execution and validating correctness and performance under varying cluster sizes.</li>
+                <li>Proposed one novel PSO-based feature-selection algorithm and implemented two modified PSO variants for high-dimensional datasets, with emphasis on convergence behavior, scalability, and robustness across benchmark data.</li>
+                <li>Conducted systematic performance benchmarking using standard optimization test functions such as Schwefel and Ackley, analyzing speedup, parallel efficiency, and convergence trends across increasing data sizes and compute nodes.</li>
+                <li>Developed a unified Spark-based experimentation framework integrating classical feature-selection methods and machine learning models, enabling consistent evaluation pipelines using NumPy, Pandas, and scikit-learn.</li>
+                <li>Performed comparative analysis of sequential versus distributed implementations, identifying algorithmic bottlenecks, communication overheads, and trade-offs between scalability and solution quality.</li>
+                <li>Mentored and technically supervised multiple student research teams as part of the Research Internship Program.</li>
+                <li>Documented experimental methodology, results, and system configurations to ensure reproducibility and publication readiness, contributing directly to a peer-reviewed journal article.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Timeline Item 4: Bhoruka Power Corporation -->
+      <div class="timeline-item right" onclick="toggleDetails(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <img src="Media/Bhoruka.png" alt="Bhoruka Logo" class="timeline-logo2">
+          <div>
+            <h3>Bhoruka Power Corporation Ltd.</h3>
+            <h4>Data Engineer | Aug 2024 – Present</h4>
+            <div class="details">
+              <ul>
+                <li>Designed and deployed production-grade analytics systems for energy-generation data across multiple power plants, supporting both operational monitoring and strategic decision-making.</li>
+                <li>Built Python-based ETL pipelines to ingest, clean, and integrate multi-source energy and financial datasets, enabling automated data processing and consistent reporting at scale.</li>
+                <li>Implemented ensemble machine learning models including Random Forest and XGBoost for energy-demand forecasting and anomaly detection, with emphasis on robustness and interpretability in real-world deployment.</li>
+                <li>Optimized SQL queries and data-pipeline performance for high-volume production workloads, reducing reporting latency and improving end-to-end data throughput.</li>
+                <li>Developed real-time Power BI dashboards to visualize plant-level performance metrics, forecasting outputs, and anomalies, bridging machine learning outputs with operational decision workflows.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Item 5: Teaching Activities -->
+      <div class="timeline-item left" onclick="toggleDetails(this)">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <img src="media/NMIT.png" alt="Teaching Logo" class="timeline-logo">
+          <div>
+            <h3>Teaching & Academic Activities</h3>
+            <h4>Workshop Instructor & Expected Teaching Assignment</h4>
+            <div class="details">
+              <p><strong>Workshop Instructor — Research & Higher Education Pathways (2025)</strong></p>
+              <ul>
+                <li>Designed and delivered a one-day academic workshop for undergraduate engineering students focused on research opportunities, research internships, and pathways to postgraduate study.</li>
+                <li>Advised students on research project selection, preparation for research internships, and early exposure to academic publishing and graduate-level expectations.</li>
+              </ul>
+              <p><strong>Expected Teaching Assignment — Placement Training Program (Starting Jan 2026)</strong></p>
+              <ul>
+                <li>Confirmed to teach core undergraduate subjects including Data Structures & Algorithms, Database Management Systems, Object-Oriented Programming, and programming fundamentals in Python and C++ to pre-final-year students.</li>
+                <li>Responsible for conceptual instruction, problem-solving sessions, and technical skill development aligned with industry and academic expectations.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </section>
 
-  <div class="pub-box" onclick="toggleExpand(this)">
-    <h3>Machine Learning & Forecasting</h3>
-    <div class="expanded-content">
-      <ul>
-        <li>Implemented supervised and unsupervised models using scikit-learn.</li>
-        <li>Used Random Forest, XGBoost, Lasso, Ridge, SVM, and SVR models.</li>
-        <li>Built forecasting systems using ARIMA, Prophet, and GBMs.</li>
-        <li>Evaluated models with MAE, RMSE, MAPE, R²; used cross-validation and diagnostics.</li>
-      </ul>
+  <!-- ============================================
+       EDUCATION SECTION
+       DO NOT CHANGE: Background image
+       ============================================ -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="education-content">
+      <h3>Bachelor of Engineering in Information Science and Engineering</h3>
+      <h4>Nitte Meenakshi Institute of Technology, Bangalore, India</h4>
+      <p>2020–2024</p>
+      <p><strong>Relevant Coursework:</strong> Machine Learning, Data Mining, Scalable Computing, Cloud Computing, Algorithms, Operating Systems, Computer Networks</p>
+      <p><strong>Final-Year Project:</strong> "Trading Auto-Bot for Enhanced Financial Decision Making"</p>
+      <p><strong>Advisors:</strong> Dr. Swarnalatha K.S. (2021–2023), Dr. Sumana Sinha (2023–2024)</p>
     </div>
-  </div>
+  </section>
 
-  <div class="pub-box" onclick="toggleExpand(this)">
-    <h3>Data Engineering & Automation</h3>
-    <div class="expanded-content">
-      <ul>
-        <li>Engineered data pipelines for collection, cleaning, transformation.</li>
-        <li>Used NumPy, Pandas for in-memory processing; handled ETL from APIs and databases.</li>
-        <li>Automated analytics and reports with robust exception handling and unit tests.</li>
-        <li>Implemented real-time ingestion with Kafka and Spark Structured Streaming.</li>
-      </ul>
+  <!-- ============================================
+       PUBLICATIONS SECTION
+       DO NOT CHANGE: Background image
+       ============================================ -->
+  <section id="publications">
+    <h2>Publications & Patents</h2>
+    <div class="cards-container">
+
+      <!-- Card 1: Publications -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-icon">📄</div>
+            <h3>Publications</h3>
+            <p style="margin-top: 15px; font-size: 0.95rem; color: #b0b0b0;">Peer-reviewed research articles</p>
+          </div>
+          <div class="flip-card-back">
+            <h4>Published Research</h4>
+             <h5>Click to redirect</h5>
+            
+            <p><strong>1.</strong> <a href="https://www.mdpi.com/1999-4893/17/11/501" target="_blank" style="color: #ffffff; text-decoration: underline;">S. A. Ludwig, J. Al-Sawwa, and A. M. Misquith</a>, "Parallelization of the Bison Algorithm Applied to Data Classification," <em>Algorithms</em>, vol. 17, no. 11, p. 501, Nov 2024.</p>
+            <a href="https://raw.githubusercontent.com/AaronMackenzie/Portfolio/d2521b81f2ea9ef6afd85cb72a12dd244a5b0c11/Publication/algorithms-17-00501-v2.pdf" class="download-btn">Download Paper</a>
+            
+            <hr style="margin: 20px 0; border-color: rgba(255,255,255,0.2);">
+            
+            <p><strong>2.</strong> <a href="https://ieeexplore.ieee.org/abstract/document/10796849" target="_blank" style="color: #ffffff; text-decoration: underline;">S. Sinha, A. Mackenzie Misquith, U. A. Nayak, and A. Sridhar</a>, "Trading Auto-Bot for Enhanced Financial Decision Making," <em>Proc. IEEE SSITCON 2024</em>, Oct 2024.</p>
+            <a href="https://raw.githubusercontent.com/AaronMackenzie/Portfolio/d2521b81f2ea9ef6afd85cb72a12dd244a5b0c11/Publication/Auto_bot_IEEE_Format.pdf" class="download-btn">Download Paper</a>
+            
+            <hr style="margin: 20px 0; border-color: rgba(255,255,255,0.2);">
+            
+            <p><strong>3.</strong> K. S. Swarnalatha et al., "Introduction to Postpartum Depression," <em>Book Chapter, Amity University Bengaluru</em>, in press (2025).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Patents -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-icon">🧠</div>
+            <h3>Patents</h3>
+            <p style="margin-top: 15px; font-size: 0.95rem; color: #b0b0b0;">Indian patent applications</p>
+          </div>
+          <div class="flip-card-back">
+            <h4>Patent Filings</h4>
+            
+            <p><strong>1.</strong> System and Method for Optimizing K-Means Clustering Using Particle Swarm Optimization for Trading Signal Generation</p>
+            <p style="font-size: 0.85rem; color: #d0d0d0; margin-top: 5px;">Indian Patent App. No. 202541064287, 2025</p>
+            
+            <hr style="margin: 20px 0; border-color: rgba(255,255,255,0.2);">
+            
+            <p><strong>2.</strong> Adaptive Intelligence Process Model (AIPM) for Dynamic Planning, Deployment, and Evolution</p>
+            <p style="font-size: 0.85rem; color: #d0d0d0; margin-top: 5px;">Indian Patent App. No. 202541070313, 2025</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Conferences -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-icon">🎤</div>
+            <h3>Conferences</h3>
+            <p style="margin-top: 15px; font-size: 0.95rem; color: #b0b0b0;">Presentations & proceedings</p>
+          </div>
+          <div class="flip-card-back">
+            <h4>Conference Participation</h4>
+            
+            <p><strong>•</strong> Trading Auto-Bot for Enhanced Financial Decision Making — IEEE SSITCON 2024</p>
+            
+            <p style="margin-top: 15px;"><strong>•</strong> Performance Benchmarking of Distributed RL Algorithms: A Case Study Using Spark and Ray — Feb 2025</p>
+            
+            <p style="margin-top: 15px;"><strong>•</strong> Parallelizing Data Mining Algorithms for Fraud Detection — Mar 2025</p>
+            
+            <p style="margin-top: 15px;"><strong>•</strong> High-Performance Fraud Detection — COMPUTINGCON 2025 (Accepted)</p>
+            
+            <p style="margin-top: 15px;"><strong>•</strong> High-Performance Fraud Detection — IC3IT 2025 (Under Revision)</p>
+            
+            <p style="margin-top: 15px;"><strong>•</strong> Asia TechX 2022, Singapore & GeoTech Asia 2022, Singapore</p>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </section>
 
-  <div class="pub-box" onclick="toggleExpand(this)">
-    <h3>Data Management</h3>
-    <div class="expanded-content">
-      <ul>
-        <li>Designed and optimized schemas for PostgreSQL, MySQL, and SQLite.</li>
-        <li>Improved query performance with indexed views, stored procedures, and joins.</li>
-        <li>Ensured ACID-compliance and transaction safety.</li>
-        <li>Interfaced with DBs using SQLAlchemy and psycopg2 in production.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="pub-box" onclick="toggleExpand(this)">
-    <h3>Quantitative Systems & Trading Automation</h3>
-    <div class="expanded-content">
-      <ul>
-        <li>Built algorithmic trading systems with real-time signal processing.</li>
-        <li>Backtested strategies using historical data and technical indicators (MACD, RSI, etc.).</li>
-        <li>Executed trades via Zerodha Kite and Alpaca APIs.</li>
-        <li>Included risk management, latency tracking, and automated adaptation systems.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="pub-box" onclick="toggleExpand(this)">
-    <h3>Visualization & Reporting</h3>
-    <div class="expanded-content">
-      <ul>
-        <li>Created dashboards using Power BI with real-time KPIs and formatting logic.</li>
-        <li>Used Matplotlib, Seaborn, Plotly, and Dash for analysis and web dashboards.</li>
-        <li>Built visual monitors for system health, trading, and HPC performance.</li>
-        <li>Focused on dynamic, contextual insights for diverse audiences.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="pub-box" onclick="toggleExpand(this)">
-    <h3>Tools & Workflow Management</h3>
-    <div class="expanded-content">
-      <ul>
-        <li>Practiced GitFlow branching, code reviews, CI/CD pipelines.</li>
-        <li>Used Jira, GitHub Projects, PyTest, venv, and conda for agile dev cycles.</li>
-        <li>Documented with Markdown, OpenAPI/Swagger, and maintained changelogs.</li>
-        <li>Containerized pipelines using Docker for reproducibility across platforms.</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-
-<section id="experience">
-  <h2>Experience</h2>
-<p class="summary">Click to view more details.</p>
-  <div class="timeline-container">
+  <!-- ============================================
+       PROJECTS SECTION
+       ============================================ -->
+  <section id="projects">
+    <h2>Selected Projects</h2>
     
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="pub-box" onclick="toggleExpand(this)">
-        <h3>Data Engineer – Bhoruka Power Corporation Limited<br><span class="timeline-date">August 2024 – Current</span></h3>
-        <div class="expanded-content">
-          <ul>
-            <li>Reduced monthly data reporting time by 65% by building Python-based ETL pipelines.</li>
-            <li>Improved energy forecasting accuracy by 17% using ensemble ML models.</li>
-            <li>Built executive-level dashboards in Power BI for 4 energy plants.</li>
-            <li>Developed automated scripts saving 25+ analyst hours monthly.</li>
-            <li>Handled end-to-end data analysis, predictive modeling, and workflow automation.</li>
-          </ul>
+    <div class="projects-grid">
+      
+      <!-- Left Column: Major Projects -->
+      <div class="major-projects">
+        <h3>Research & Systems Projects</h3>
+        
+        <div class="project-card">
+          <h4>Parallelizing Evolutionary Algorithms in Apache Spark</h4>
+          <p>Designed and implemented distributed versions of PSO, GSO, ACO, and Genetic Algorithms using Apache Spark and HDFS. Benchmarked scalability and convergence behavior on high-dimensional optimization problems across multi-node clusters. Analyzed trade-offs between parallel efficiency, communication overhead, and solution quality.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>Novel PSO-Based Feature Selection Algorithms</h4>
+          <p>Designed two modified PSO variants for feature selection in high-dimensional datasets. Evaluated convergence stability, dimensionality reduction effectiveness, and classification performance across benchmark datasets. Compared proposed methods against classical feature-selection techniques.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>Distributed RL vs Data-Mining Benchmarking (Ray vs Spark)</h4>
+          <p>Conducted a comparative study of distributed reinforcement learning and data-mining workloads across Ray and Spark frameworks. Analyzed training throughput, scalability limits, and system-level bottlenecks under varying cluster configurations.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>Trading AutoBot — Adaptive Decision-Making System</h4>
+          <p>Developed an automated trading system integrating statistical models, machine learning, and adaptive strategy selection. Implemented large-scale backtesting pipelines and live execution via brokerage APIs. This work resulted in a peer-reviewed IEEE publication and an Indian patent filing.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>TruthScore — Multimodal Consistency Detection for E-Commerce</h4>
+          <p>Designed a multimodal ML system to detect inconsistencies between product images, text descriptions, pricing, and reviews. Proposed a novel mismatch-scoring algorithm using cross-modal embeddings and similarity constraints. Built an end-to-end pipeline from preprocessing to evaluation under real-world data constraints.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>AIPM — Adaptive Intelligence Process Model</h4>
+          <p>Designed a scalable framework for autonomous system planning, deployment, and evolution. Focused on feedback-driven adaptation and system-level intelligence. Filed as an Indian patent for autonomous system evolution.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>Adaptive Pricing Negotiator Agent</h4>
+          <p>Implemented a reinforcement learning–based negotiation agent for real-time pricing decisions. Modeled customer behavior patterns and evaluated negotiation strategies under simulated environments.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>Goal-Driven Search Engine</h4>
+          <p>Engineered an information-retrieval system that ranks content based on task progression and intent, rather than document similarity alone. Explored alternative ranking objectives beyond traditional TF-IDF–style retrieval.</p>
+        </div>
+
+        <!-- Minor Projects Section -->
+        <div class="minor-projects">
+          <h4>Additional Technical Projects</h4>
+          <div class="minor-projects-grid">
+            <div class="minor-project-item">• Recipe Sharing Platform (Full-stack: Node.js, MongoDB, HTML/CSS)</div>
+            <div class="minor-project-item">• Automated Subscription Manager (UPI-Based)</div>
+            <div class="minor-project-item">• Personal Assistant System (GPT-4 + Whisper)</div>
+            <div class="minor-project-item">• AR App for Exercise Form Demonstration (Unity, Vuforia)</div>
+            <div class="minor-project-item">• Autonomous Drone Prototype (Arduino Uno, C++)</div>
+            <div class="minor-project-item">• Security Experimentation: Brute-Force & Dictionary Attacks (Python)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Image Gallery -->
+      <div class="project-gallery-side">
+        <h3>Project Gallery</h3>
+        <div class="gallery-wrapper">
+          <div class="gallery-track" id="gallery-track">
+            <!-- Images will be loaded by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       HONORS & AWARDS SECTION
+       ============================================ -->
+  <section id="achievements">
+    <h2>Honors & Awards</h2>
+
+    <div class="trophy-grid">
+      <div class="trophy-row top-row">
+        <div class="trophy-circle" data-rank="🌍">
+          <div class="icon">✈️</div>
+          <h4>International Business Plan Finalist</h4>
+          <p>Singapore, 2022</p>
+        </div>
+        <div class="trophy-circle" data-rank="🥈">
+          <div class="icon">🏆</div>
+          <h4>National Runner-Up</h4>
+          <p>IIT Bombay, 2021</p>
+        </div>
+        <div class="trophy-circle" data-rank="🥇">
+          <div class="icon">⭐</div>
+          <h4>Regional Winner</h4>
+          <p>LWT Bangalore, 2021</p>
+        </div>
+      </div>
+
+      <div class="trophy-row bottom-row">
+        <div class="trophy-circle" data-rank="🤖">
+          <div class="icon">🔬</div>
+          <h4>Amateur Scientist Runner-Up</h4>
+          <p>Infosys @ PES, 2015</p>
+        </div>
+        <div class="trophy-circle" data-rank="👑">
+          <div class="icon">🎯</div>
+          <h4>Student Council President</h4>
+          <p>Nitte PU College, 2019</p>
         </div>
       </div>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="pub-box" onclick="toggleExpand(this)">
-        <h3>Research Intern – North Dakota State University<br><span class="timeline-date">February 2024 – July 2024</span></h3>
-        <div class="expanded-content">
-          <ul>
-            <li>Parallelized PSO, Glowworm Swarm, Genetic Algorithm using Apache Spark and HDFS.</li>
-            <li>Designed 1 novel and 2 PSO-based feature selection algorithms.</li>
-            <li>Applied evolutionary algorithms to benchmark optimization problems.</li>
-            <li>Used NumPy, Pandas, scikit-learn for ML integration.</li>
-          </ul>
+    <div style="max-width: 900px; margin: 60px auto 0; background: rgba(20, 20, 20, 0.8); padding: 40px; border-radius: 15px; border: 1px solid #2a2a2a;">
+      <h3 style="color: #3a7bc8; margin-bottom: 25px; font-size: 1.8rem;">Service & Leadership</h3>
+      
+      <div style="margin-bottom: 20px;">
+        <h4 style="color: #ffffff; margin-bottom: 8px;">Vice President — Music Club</h4>
+        <p style="color: #b0b0b0; margin: 0; font-size: 0.95rem;">Nitte Meenakshi Institute of Technology, 2022–2023</p>
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <h4 style="color: #ffffff; margin-bottom: 8px;">Project Representative — Final Year Project</h4>
+        <p style="color: #b0b0b0; margin: 0; font-size: 0.95rem;">Nitte Meenakshi Institute of Technology, 2023–2024</p>
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <h4 style="color: #ffffff; margin-bottom: 8px;">Head Coordinator — Battle of Bands</h4>
+        <p style="color: #b0b0b0; margin: 0; font-size: 0.95rem;">Nitte Meenakshi Institute of Technology, 2022 & 2023</p>
+      </div>
+      
+      <div>
+        <h4 style="color: #ffffff; margin-bottom: 8px;">Department Coordination & College Fest Committee Member</h4>
+        <p style="color: #b0b0b0; margin: 0; font-size: 0.95rem;">Nitte Meenakshi Institute of Technology, 2020–2024</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT SECTION
+       ============================================ -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="icon">✉️</div>
+        <div>
+          <strong>Email:</strong> <a href="mailto:aaronmackenzz@gmail.com">aaronmackenzz@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle">
+  <path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.95.57.11.78-.25.78-.55v-2.02c-3.2.7-3.87-1.54-3.87-1.54-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.27 1.19-3.07-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.17a11.1 11.1 0 0 1 5.8 0c2.21-1.48 3.18-1.17 3.18-1.17.63 1.59.23 2.77.11 3.06.74.8 1.19 1.82 1.19 3.07 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.08.78 2.18v3.24c0 .3.21.66.79.55A11.52 11.52 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5z"/>
+</svg>
+</div>
+        <div>
+          <strong>GitHub:</strong> <a href="https://github.com/AaronMackenzie" target="_blank">github.com/AaronMackenzie</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle">
+  <path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 7.09L5.47 7 12 4.91 18.53 7 12 9.09z"/>
+  <path d="M11 12.91L6 10.64V14c0 2.21 2.24 4 5 4s5-1.79 5-4v-3.36l-5 2.27z"/>
+</svg>
+</div>
+        <div>
+          <strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=3Jr8lpwAAAAJ&hl=en" target="_blank">scholar.google.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">📍</div>
+        <div>
+          <strong>Location:</strong> Bangalore, India
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="pub-box" onclick="toggleExpand(this)">
-        <h3>Research Assistant – Dr. Swarnalatha Ks<br><span class="timeline-date">September 2022 – December 2023</span></h3>
-        <div class="expanded-content">
-          <ul>
-            <li>Built an automated trading bot using market APIs and real-time data.</li>
-            <li>Designed and optimized trading algorithms with statistical models.</li>
-            <li>Conducted strategy back-testing and real-money trade execution.</li>
-            <li>Implemented real-time monitoring and dynamic performance adjustments.</li>
-            <li>Created risk management protocols and compliance models.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<section id="publications">
-  <h2>Publications</h2>
-        <p class="summary">Click to view more details.</p>
-  <div class="pub-container">
-    <div class="pub-box" onclick="toggleExpand(this)">
-      <h3>Publications</h3>
-      <div class="expanded-content">
-        <ul>
-          <li><a href="https://www.mdpi.com/1999-4893/17/11/501" target="_blank">Simone A Ludwig, Jamil Al-Sawwa, Aaron Mackenzie Misquith, "Parallelization of the Bison Algorithm Applied to Data Classification," MDPI Algorithms Journal. (November 2024)</a></li>
-          <li><a href="https://ieeexplore.ieee.org/abstract/document/10796849" target="_blank">Sinha, S., Mackenzie, A., Nayak, U., Sridhar, A., "Trading Auto-bot for Enhanced Financial Decision Making," IEEE SSITCON 2024, DOI: 10.1109/SSITCON62437.2024.10796849. (October 2024)</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="pub-box" onclick="toggleExpand(this)">
-      <h3>Patent</h3>
-      <div class="expanded-content">
-        <p>Filed a patent for the "Automated Trading Bot Workflow and Complexity Analysis" with the Indian Office of Intellectual Property, Chennai. (Yet to be granted)</p>
-      </div>
-    </div>
-
-    <div class="pub-box" onclick="toggleExpand(this)">
-      <h3>Conference</h3>
-      <div class="expanded-content">
-        <ul>
-          <li>Trading Auto-bot for Enhanced Financial Decision Making: Presented in 2024 First International Conference on Software, Systems and Information Technology (SSITCON)</li>
-          <li>Performance Benchmarking of Distributed Reinforcement Learning Algorithms: A Case Study Using Spark and Ray - presented at BMSIT (February 2025)</li>
-          <li>Parallelizing Data Mining Algorithms for Fraud Detection in Large-Scale Transaction Datasets: presented at MAHE (March 2025)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="projects">
-  <h2>Minor Projects</h2>
-  <ul class="projects-list">
-    <li class="project">
-      <strong>Recipe Sharing Platform</strong>
-      <ul>
-        <li>Full-Stack Development</li>
-        <li>Built backend with MongoDB Atlas and frontend with JavaScript, Node.js, CSS, and HTML.</li>
-        <li>Hosted locally on localhost:7077 for development and testing.</li>
-      </ul>
-    </li>
-
-    <li class="project">
-      <strong>Drone Project</strong>
-      <ul>
-        <li>Designed a drone using Arduino Uno.</li>
-        <li>Programmed in C++ for basic stability and control.</li>
-      </ul>
-    </li>
-
-    <li class="project">
-      <strong>AR App for Demonstrating Exercise Form</strong>
-      <ul>
-        <li>Created an AR app using Unity and Vuforia.</li>
-        <li>Integrated 3D models to show correct exercise form.</li>
-        <li>Enabled real-time motion tracking.</li>
-      </ul>
-    </li>
-
-    <li class="project">
-      <strong>Personal Assistant</strong>
-      <ul>
-        <li>Developed using Python and GPT-4.</li>
-        <li>Integrated OpenAI Whisper for voice interaction and task automation.</li>
-        <li>Tested against hash functions like MD5, SHA-1, and bcrypt.</li>
-      </ul>
-    </li>
-
-    <li class="project">
-      <strong>Simple Brute Force Attack and Dictionary Attack</strong>
-      <ul>
-        <li>Created a Python brute force script for login systems.</li>
-        <li>Built a dictionary attack script for hash cracking.</li>
-        <li>Used multithreading to increase speed and efficiency.</li>
-      </ul>
-    </li>
-
-    <li class="project">
-      <strong>Automated Subscription Manager (using Indian UPI System)</strong>
-      <ul>
-        <li>Developed a subscription manager with UPI integration for recurring payments.</li>
-        <li>Backend built with Node.js and Express.</li>
-        <li>Frontend enabled user management and payment tracking.</li>
-      </ul>
-    </li>
-  </ul>
-</section>
-
-
-<section id="achievements">
-  <h2>Achievements</h2>
-  <ul class="projects-list">
-    <li class="project">• <strong>Student Council President</strong> — NITTE PU College, 2019</li>
-    <li class="project">• <strong>International B-plan Candidate</strong> — Held in Singapore, 2022</li>
-    <li class="project">• <strong>National B-plan Runner-up</strong> — IIT Bombay, 2021</li>
-    <li class="project">• <strong>Regional B-plan Winner</strong> — Organized by LWT Bangalore, 2021</li>
-    <li class="project">• <strong>Amateur Scientist Runner-up</strong> — National U18 robotics comp. by Infosys @ PES University, Bangalore, 2015</li>
-  </ul>
-</section>
-
-<section id="contact">
-  <h2>Contact Me</h2>
-  <div class="contact-details">
-    <p><strong>Email:</strong> aaron.misquith@example.com</p>
-    <p><strong>Phone:</strong> +91-9008987779</p>
-    <p><strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank">View my profile</a></p>
-    <p><strong>GitHub:</strong> <a href="https://github.com/AaronMackenzie" target="_blank">github.com/AaronMackenzie</a></p>
-  </div>
-</section>
-
+ <script src="script.js"></script>
 
 </body>
-<script>
-function toggleExpand(element) {
-  element.classList.toggle('expanded');
-}
-
-function expandBox(box) {
-  const contentHeight = box.scrollHeight;
-  box.style.height = box.offsetHeight + "px";
-  box.classList.add("expanded");
-
-  requestAnimationFrame(() => {
-    box.style.height = contentHeight + "px";
-  });
-
-  box.addEventListener('transitionend', function handler() {
-    box.style.height = 'auto';
-    box.removeEventListener('transitionend', handler);
-  });
-}
-
-function collapseBox(box) {
-  const contentHeight = box.scrollHeight;
-  box.style.height = contentHeight + "px";
-
-  requestAnimationFrame(() => {
-    box.style.height = "60px"; // Adjust this if your collapsed box has a different height
-  });
-
-  box.classList.remove("expanded");
-}
-
-// Animate .project and .project-box when in viewport
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.project, .project-box').forEach(project => {
-  observer.observe(project);
-});
-</script>
-
-
 </html>
