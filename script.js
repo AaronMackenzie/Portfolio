@@ -1,34 +1,37 @@
-    window.addEventListener("DOMContentLoaded", () => {
-      const intro = document.getElementById("intro");
-      const img = document.getElementById("intro-img");
+   window.addEventListener("DOMContentLoaded", () => {
+  const intro = document.getElementById("intro");
+  const video = intro.querySelector("video");
 
-      // Lock scrolling during intro
-      document.body.style.overflow = "hidden";
+  // Lock scrolling during intro
+  document.body.style.overflow = "hidden";
 
-      // CHANGE: Duration in milliseconds (4500 = 4.5 seconds)
-      const TOTAL_DURATION = 5000; // Total time intro shows
-      const FADE_DURATION = 300;   // Fade out duration (last 0.5 seconds)
+  const FADE_DURATION = 500; // fade-out duration in ms
 
-      // When image loads, start timer
-      img.onload = () => {
-        setTimeout(() => {
-          intro.classList.add("fade-out"); // Start fade out
+  // Wait until video metadata is loaded (duration is known)
+  video.addEventListener("loadedmetadata", () => {
+    const videoDuration = video.duration * 1000; // seconds → ms
 
-          // Remove intro after fade completes
-          setTimeout(() => {
-            intro.remove();
-            document.body.style.overflow = "auto"; // Restore scrolling
-          }, FADE_DURATION);
+    // Start fade-out slightly before video ends
+    const fadeStartTime = Math.max(videoDuration - FADE_DURATION, 0);
 
-        }, TOTAL_DURATION - FADE_DURATION);
-      };
+    setTimeout(() => {
+      intro.classList.add("fade-out");
 
-      // If image fails to load, remove intro immediately
-      img.onerror = () => {
+      // Remove intro after fade completes
+      setTimeout(() => {
         intro.remove();
         document.body.style.overflow = "auto";
-      };
-    });
+      }, FADE_DURATION);
+
+    }, fadeStartTime);
+  });
+
+  // Safety fallback: if video fails to load
+  video.addEventListener("error", () => {
+    intro.remove();
+    document.body.style.overflow = "auto";
+  });
+});
 
     /* ===============================
        TIMELINE TOGGLE DETAILS
