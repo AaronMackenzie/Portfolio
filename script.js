@@ -11,7 +11,7 @@
   // Lock scrolling during intro
   document.body.style.overflow = "hidden";
 
-  const FADE_DURATION = 500; // ms
+  const FADE_DURATION = 250; // ms
 
   const startFadeSequence = () => {
     const videoDuration = video.duration * 1000 || 0;
