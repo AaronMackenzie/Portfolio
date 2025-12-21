@@ -128,7 +128,7 @@ const galleryTrack = document.getElementById("gallery-track");
       // Load images immediately - no delay
       imageNames.forEach(name => {
         const img = document.createElement("img");
-        img.src = `media/gallery/${name}`; // DO NOT CHANGE: Path to images
+        img.src = `Media/gallery/${name}`; // DO NOT CHANGE: Path to images
         img.alt = "Project screenshot";
         img.loading = "eager"; // Load immediately instead of lazy
         galleryTrack.appendChild(img);
