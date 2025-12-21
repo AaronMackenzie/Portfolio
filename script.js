@@ -1,37 +1,46 @@
-   window.addEventListener("DOMContentLoaded", () => {
+ window.addEventListener("DOMContentLoaded", () => {
   const intro = document.getElementById("intro");
   const video = intro.querySelector("video");
+
+  if (!video) {
+    intro.remove();
+    document.body.style.overflow = "auto";
+    return;
+  }
 
   // Lock scrolling during intro
   document.body.style.overflow = "hidden";
 
-  const FADE_DURATION = 500; // fade-out duration in ms
+  const FADE_DURATION = 500; // ms
 
-  // Wait until video metadata is loaded (duration is known)
-  video.addEventListener("loadedmetadata", () => {
-    const videoDuration = video.duration * 1000; // seconds → ms
-
-    // Start fade-out slightly before video ends
+  const startFadeSequence = () => {
+    const videoDuration = video.duration * 1000 || 0;
     const fadeStartTime = Math.max(videoDuration - FADE_DURATION, 0);
 
     setTimeout(() => {
       intro.classList.add("fade-out");
 
-      // Remove intro after fade completes
       setTimeout(() => {
         intro.remove();
         document.body.style.overflow = "auto";
       }, FADE_DURATION);
-
     }, fadeStartTime);
-  });
+  };
 
-  // Safety fallback: if video fails to load
+  // If metadata already loaded (cached video)
+  if (video.readyState >= 1) {
+    startFadeSequence();
+  } else {
+    video.addEventListener("loadedmetadata", startFadeSequence, { once: true });
+  }
+
+  // Safety fallback
   video.addEventListener("error", () => {
     intro.remove();
     document.body.style.overflow = "auto";
   });
 });
+
 
     /* ===============================
        TIMELINE TOGGLE DETAILS
