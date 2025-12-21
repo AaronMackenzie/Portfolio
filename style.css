@@ -25,17 +25,21 @@
        CHANGE: Adjust TOTAL_DURATION in JS to control how long intro shows
        ======================================== */
     
-    #intro {
-      position: fixed;
-      inset: 0;
-      background: #000000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      opacity: 1;
-      transition: opacity 1.2s ease; /* Duration of fade out effect */
-    }
+   #intro {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
     
     #intro.fade-out {
       opacity: 0;
