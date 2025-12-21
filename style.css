@@ -1409,141 +1409,169 @@
       text-decoration: underline;
     }
     
-    /* ========================================
-       RESPONSIVE DESIGN - MOBILE & TABLET
-       CHANGE: max-width values to target different screen sizes
-       ======================================== */
-    
-    /* Tablets and smaller screens */
-    @media (max-width: 1024px) {
-      section {
-        padding: 100px 30px 60px;
-      }
-      
-      .skills-overlay-box {
-        width: 85%;
-        top: -100px;
-      }
-      
-      .timeline-item {
-        width: 100%;
-        left: 0 !important;
-        text-align: left !important;
-        padding-left: 60px !important;
-        padding-right: 20px !important;
-      }
-      
-      .timeline-line {
-        left: 30px !important;
-      }
-      
-      .timeline-dot {
-        left: 21px !important;
-        right: auto !important;
-      }
-      
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .project-gallery-side {
-        position: relative;
-        top: 0;
-      }
-    }
-    
-    /* Mobile phones */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px;
-      }
-      
-      .nav-links {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .navbar a::after {
-        display: none; /* Remove dividers on mobile */
-      }
-      
-      .contact-icons {
-        margin-top: 10px;
-      }
-      
-      section h2 {
-        font-size: 2rem;
-      }
-      
-      .home-overlay {
-        padding: 30px;
-      }
-      
-      .home-overlay h1 {
-        font-size: 2rem;
-      }
-      
-      .skills-container {
-        gap: 30px;
-      }
-      
-      .skill-content {
-        flex-direction: column;
-      }
-      
-      .skill-description,
-      .skill-graph {
-        flex: 1 1 100%;
-        min-width: 100%;
-      }
-      
-      .flip-card {
-        width: 100%;
-        max-width: 350px;
-        height: 400px;
-      }
-      
-      .trophy-row {
-        gap: 30px;
-      }
-      
-      .trophy-circle {
-        width: 150px;
-        height: 150px;
-      }
-      
-      .minor-projects-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    /* Very small screens */
-    @media (max-width: 480px) {
-      section {
-        padding: 80px 20px 40px;
-      }
-      
-      .home-overlay h1 {
-        font-size: 1.5rem;
-      }
-      
-      .home-overlay p {
-        font-size: 1rem;
-      }
-      
-      .skills-overlay-box {
-        width: 95%;
-        padding: 25px;
-      }
-      
-      .trophy-circle {
-        width: 130px;
-        height: 130px;
-      }
-      
-      .trophy-circle .icon {
-        font-size: 2rem;
-      }
-    }
+ /* ========================================
+   RESPONSIVE DESIGN — TABLET & MOBILE
+   Fixed layout parity, background bugs,
+   radar chart rendering, and spacing issues
+   ======================================== */
+
+/* =========================
+   Tablets (≤1024px)
+   ========================= */
+@media (max-width: 1024px) {
+
+  section {
+    padding: 100px 30px 60px;
+  }
+
+  /* Skills overlay: reduce overlap drama */
+  .skills-overlay-box {
+    width: 85%;
+    top: -80px;
+  }
+
+  /* Timeline collapses cleanly */
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    text-align: left !important;
+    padding-left: 60px !important;
+    padding-right: 20px !important;
+  }
+
+  .timeline-line {
+    left: 30px !important;
+  }
+
+  .timeline-dot {
+    left: 21px !important;
+    right: auto !important;
+  }
+
+  /* Projects stack */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-gallery-side {
+    position: relative;
+    top: 0;
+  }
+}
+
+/* =========================
+   Mobile (≤768px)
+   ========================= */
+@media (max-width: 768px) {
+
+  /* NAVBAR */
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-icons {
+    margin-top: 10px;
+  }
+
+  /* HEADINGS */
+  section h2 {
+    font-size: 2rem;
+  }
+
+  /* HOME */
+  .home-overlay {
+    padding: 30px;
+  }
+
+  .home-overlay h1 {
+    font-size: 2rem;
+  }
+
+  /* SKILLS SECTION — critical fixes */
+
+  /* Disable fixed background on mobile */
+  #skills {
+    background-attachment: scroll;
+    background-position: center top;
+    padding-top: 140px;
+  }
+
+  /* Overlay box becomes normal flow element */
+  .skills-overlay-box {
+    position: relative;
+    top: 0;
+    width: 90%;
+    margin: 0 auto 40px;
+    padding: 30px;
+  }
+
+  .skills-container {
+    gap: 30px;
+  }
+
+  /* Stack description + chart */
+  .skill-content {
+    flex-direction: column;
+  }
+
+  .skill-description,
+  .skill-graph {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  /* FORCE radar charts to render */
+  .skill-graph canvas {
+    width: 100% !important;
+    height: 250px !important;
+  }
+
+  /* Publications cards */
+  .flip-card {
+    width: 100%;
+    max-width: 360px;
+    height: 420px;
+  }
+
+  /* Minor projects */
+  .minor-projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   Small phones (≤480px)
+   ========================= */
+@media (max-width: 480px) {
+
+  section {
+    padding: 80px 20px 40px;
+  }
+
+  /* HOME */
+  .home-overlay h1 {
+    font-size: 1.6rem;
+  }
+
+  .home-overlay p {
+    font-size: 1rem;
+  }
+
+  /* SKILLS overlay tighter */
+  .skills-overlay-box {
+    width: 95%;
+    padding: 24px;
+  }
+
+  /* Charts slightly smaller */
+  .skill-graph canvas {
+    height: 220px !important;
+  }
+}
