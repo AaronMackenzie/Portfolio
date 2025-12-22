@@ -1409,4 +1409,401 @@
       text-decoration: underline;
     }
     
- 
+
+/* ========================================
+   RADAR CHART FIX - Add fallback and better initialization
+   ======================================== */
+
+/* Ensure canvas has explicit dimensions */
+.skill-graph canvas {
+  width: 100% !important;
+  height: 300px !important;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   MOBILE & TABLET RESPONSIVE FIXES
+   Remove fixed backgrounds, add mobile layouts
+   ======================================== */
+
+/* Base responsive typography */
+@media (max-width: 768px) {
+  section h2 {
+    font-size: 2rem;
+  }
+  
+  section {
+    padding: 100px 20px 60px;
+  }
+}
+
+/* ========================================
+   HOME SECTION - MOBILE FIX
+   ======================================== */
+
+@media (max-width: 1024px) {
+  #home {
+    background-attachment: scroll; /* Changed from fixed for mobile */
+    height: 100vh; /* Reduced height on mobile */
+  }
+  
+  .home-overlay {
+    width: 90%;
+    padding: 30px;
+  }
+  
+  .home-overlay h1 {
+    font-size: 2rem;
+  }
+  
+  .home-overlay h2 {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* ========================================
+   SKILLS SECTION - MOBILE FIX
+   ======================================== */
+
+@media (max-width: 1024px) {
+  #skills {
+    background-attachment: scroll; /* Changed from fixed */
+    padding-top: 120px;
+  }
+  
+  .skills-overlay-box {
+    width: 90%;
+    padding: 25px;
+    top: -80px;
+  }
+  
+  .skills-overlay-box h2 {
+    font-size: 1.6rem;
+  }
+  
+  .skills-overlay-box p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .skill-content {
+    flex-direction: column;
+  }
+  
+  .skill-description,
+  .skill-graph {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+  
+  .skill-graph {
+    max-width: 100%;
+  }
+  
+  .skill-category h3 {
+    font-size: 1.4rem;
+  }
+}
+
+/* ========================================
+   EXPERIENCE SECTION - MOBILE FIX
+   ======================================== */
+
+@media (max-width: 1024px) {
+  #experience {
+    background-attachment: scroll; /* Changed from fixed */
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-container {
+    padding: 20px 0;
+  }
+  
+  .timeline-line {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    width: calc(100% - 60px);
+    left: 60px !important;
+    text-align: left !important;
+    padding: 15px;
+    padding-left: 20px;
+  }
+  
+  .timeline-item.left,
+  .timeline-item.right {
+    padding-left: 20px;
+    padding-right: 15px;
+  }
+  
+  .timeline-item.left .timeline-content h3,
+  .timeline-item.left .timeline-content h4 {
+    text-align: left;
+  }
+  
+  .timeline-dot {
+    left: -40px !important;
+    right: auto !important;
+    transform: translateX(0) !important;
+  }
+  
+  .timeline-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .timeline-logo,
+  .timeline-logo1,
+  .timeline-logo2 {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* ========================================
+   EDUCATION SECTION - MOBILE FIX
+   ======================================== */
+
+@media (max-width: 1024px) {
+  #education {
+    background-attachment: scroll; /* Changed from fixed */
+  }
+}
+
+@media (max-width: 768px) {
+  .education-content {
+    padding: 30px 20px;
+  }
+  
+  .education-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .education-content h4 {
+    font-size: 1.1rem;
+  }
+  
+  .education-content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ========================================
+   PUBLICATIONS SECTION - MOBILE FIX
+   ======================================== */
+
+@media (max-width: 1024px) {
+  #publications {
+    background-attachment: scroll; /* Changed from fixed */
+  }
+}
+
+@media (max-width: 768px) {
+  .flip-card {
+    width: 100%;
+    max-width: 350px;
+    height: 450px;
+  }
+  
+  .cards-container {
+    gap: 30px;
+  }
+}
+
+/* ========================================
+   PROJECTS SECTION - MOBILE FIX
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .project-gallery-side {
+    position: relative;
+    top: 0;
+    max-height: 500px;
+  }
+  
+  .gallery-wrapper {
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .major-projects {
+    padding: 25px;
+  }
+  
+  .major-projects h3 {
+    font-size: 1.6rem;
+  }
+  
+  .project-card {
+    padding: 20px;
+  }
+  
+  .project-card h4 {
+    font-size: 1.2rem;
+  }
+  
+  .minor-projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   ACHIEVEMENTS SECTION - GRADIENT BACKGROUND
+   ======================================== */
+
+#achievements {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 15, 30, 0.95) 0%,
+    rgba(20, 30, 50, 0.95) 25%,
+    rgba(30, 50, 80, 0.95) 50%,
+    rgba(20, 30, 50, 0.95) 75%,
+    rgba(10, 15, 30, 0.95) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  padding: 100px 20px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Remove old background image */
+#achievements::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('Media/Collage.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15; /* Very subtle background image overlay */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content is above background */
+#achievements > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 768px) {
+  .trophy-row {
+    gap: 30px;
+  }
+  
+  .trophy-circle {
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+  }
+  
+  .trophy-circle .icon {
+    font-size: 2.5rem;
+  }
+  
+  .trophy-circle h4 {
+    font-size: 0.9rem;
+  }
+  
+  .trophy-circle p {
+    font-size: 0.8rem;
+  }
+}
+
+/* ========================================
+   CONTACT SECTION - MOBILE FIX
+   ======================================== */
+
+@media (max-width: 1024px) {
+  #contact {
+    background-attachment: scroll; /* Changed from fixed */
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-info {
+    padding: 30px 20px;
+  }
+  
+  .contact-item {
+    font-size: 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .contact-item:hover {
+    transform: translateX(0);
+  }
+}
+
+/* ========================================
+   NAVBAR - MOBILE FIX
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .navbar {
+    flex-direction: column;
+    padding: 12px 20px;
+    gap: 15px;
+  }
+  
+  .nav-links {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .navbar a {
+    font-size: 0.9rem;
+  }
+  
+  .contact-icons {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 15px;
+  }
+  
+  .navbar a {
+    font-size: 0.85rem;
+    padding: 4px 0;
+  }
+}
+
+/* ========================================
+   PARALLAX FIX - DISABLE ON MOBILE
+   ======================================== */
+
+@media (max-width: 1024px) {
+  /* Override any parallax JavaScript effects */
+  section {
+    background-position: center !important;
+  }
+}
+
+
+
