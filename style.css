@@ -1417,8 +1417,8 @@
 /* Ensure canvas has explicit dimensions */
 .skill-graph canvas {
   width: 100% !important;
-  height: 500px !important;
-  max-width: 500px;
+  height: 400px !important;
+  max-width: 400px;
   margin: 0 auto;
 }
 
