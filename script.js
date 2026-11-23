@@ -30,10 +30,20 @@ window.addEventListener("DOMContentLoaded", () => {
     video.addEventListener("loadedmetadata", startFadeSequence, { once: true });
   }
 
-  video.addEventListener("error", () => {
+  // If the video cannot load (unsupported codec, missing file, blocked), do not leave the
+  // page black and unscrollable. An error in a <source> child does not reach the <video>
+  // element, so listen on both, and add a safety timeout.
+  const skipIntro = () => {
+    if (!document.body.contains(intro)) return;
     intro.remove();
     document.body.style.overflow = "auto";
-  });
+  };
+  video.addEventListener("error", skipIntro);
+  const source = video.querySelector("source");
+  if (source) source.addEventListener("error", skipIntro);
+  setTimeout(() => {
+    if (video.readyState === 0) skipIntro();
+  }, 6000);
 });
 
 function toggleDetails(element) {
@@ -117,7 +127,7 @@ if (galleryTrack) {
   
   imageNames.forEach(name => {
     const img = document.createElement("img");
-    img.src = `media/gallery/${name}`;
+    img.src = `Media/gallery/${name}`;
     img.alt = "Project screenshot";
     img.loading = "eager";
     galleryTrack.appendChild(img);
